@@ -25,8 +25,10 @@ export class Component {
   }
   update() {
     let isSameNode = (oldNode, newNode) => {
+      // 类型不相同
       if (oldNode.type !== newNode.type)
         return false
+      // 参数不相同
       for (let name in newNode.props) {
         if (newNode.props[name] !== oldNode.props[name]) {
           return false
@@ -34,6 +36,7 @@ export class Component {
       }
       if (Object.keys(oldNode.props).length > Object.keys(newNode.props).length)
         return false
+      // 对于文本节点，content不相同
       if (newNode.type === '#text') {
         if(newNode.content !== oldNode.content) {
           return false
